@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>⚡ EXPRESSION MASTER ⚡ | GAMING EDITION</title>
+    <title>Calulator GAMING</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Orbitron:wght@400;700;900&display=swap');
         
@@ -15,13 +15,184 @@
 
         body {
             min-height: 100vh;
-            background: radial-gradient(circle at 20% 20%, #1a0b2e, #0a0515);
-            display: flex;
-            justify-content: center;
-            align-items: center;
             font-family: 'Orbitron', sans-serif;
             position: relative;
             overflow: hidden;
+            transition: background 0.5s ease;
+        }
+
+        /* Dark Mode (default) */
+        body.dark-mode {
+            background: radial-gradient(circle at 20% 20%, #1a0b2e, #0a0515);
+        }
+
+        body.dark-mode .cyber-grid {
+            background-image: 
+                linear-gradient(rgba(0, 255, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 255, 255, 0.05) 1px, transparent 1px);
+        }
+
+        body.dark-mode .glow-orb {
+            background: radial-gradient(circle, rgba(0, 255, 255, 0.15) 0%, transparent 70%);
+        }
+
+        body.dark-mode .orb2 {
+            background: radial-gradient(circle, rgba(255, 0, 255, 0.15) 0%, transparent 70%);
+        }
+
+        body.dark-mode .calculator-container {
+            background: rgba(10, 5, 25, 0.85);
+            border-color: #00ffff;
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.5), inset 0 0 30px rgba(0, 255, 255, 0.3);
+        }
+
+        body.dark-mode .game-title {
+            background: linear-gradient(45deg, #00ffff, #ff00ff, #00ffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 20px rgba(0, 255, 255, 0.7);
+        }
+
+        body.dark-mode .mode-selector {
+            background: rgba(0, 0, 0, 0.7);
+            border-color: #00ffff;
+            color: #00ffff;
+        }
+
+        body.dark-mode .game-input {
+            background: rgba(0, 0, 0, 0.8);
+            border-color: #00ffff;
+            color: #00ffff;
+        }
+
+        body.dark-mode .input-label {
+            color: #00ffff !important;
+        }
+
+        body.dark-mode .output-container {
+            background: rgba(0, 0, 0, 0.9);
+            border-color: #00ffff;
+        }
+
+        body.dark-mode .output-header {
+            background: rgba(0, 255, 255, 0.1);
+            border-bottom-color: #00ffff;
+        }
+
+        body.dark-mode .output-title {
+            color: #00ffff !important;
+        }
+
+        body.dark-mode .game-output {
+            color: #00ff00;
+            text-shadow: 0 0 10px #00ff00;
+        }
+
+        /* แก้ไขให้ HP: แสดงใน dark mode */
+        body.dark-mode .info-bar {
+            color: #00ffff;
+        }
+
+        body.dark-mode .health-bar span {
+            color: #00ffff;
+        }
+
+        body.dark-mode .score {
+            color: #ff00ff;
+            text-shadow: 0 0 10px #ff00ff;
+        }
+
+        body.dark-mode .version {
+            color: #00ffff;
+        }
+
+        /* Light Mode */
+        body.light-mode {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        body.light-mode .cyber-grid {
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+        }
+
+        body.light-mode .glow-orb {
+            background: radial-gradient(circle, rgba(255, 215, 0, 0.2) 0%, transparent 70%);
+        }
+
+        body.light-mode .orb2 {
+            background: radial-gradient(circle, rgba(255, 105, 180, 0.2) 0%, transparent 70%);
+        }
+
+        body.light-mode .calculator-container {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border: 3px solid #ffd700;
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.5), inset 0 0 30px rgba(255, 215, 0, 0.3);
+        }
+
+        body.light-mode .game-title {
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #ffd700);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+        }
+
+        body.light-mode .mode-selector {
+            background: rgba(255, 255, 255, 0.9);
+            border: 2px solid #ffd700;
+            color: #333;
+        }
+
+        body.light-mode .game-input {
+            background: rgba(255, 255, 255, 0.9);
+            border: 2px solid #ffd700;
+            color: #333;
+        }
+
+        body.light-mode .input-label {
+            color: #ffd700;
+        }
+
+        body.light-mode .output-container {
+            background: rgba(255, 255, 255, 0.95);
+            border: 3px solid #ffd700;
+        }
+
+        body.light-mode .output-header {
+            background: rgba(255, 215, 0, 0.1);
+            border-bottom-color: #ffd700;
+        }
+
+        body.light-mode .output-title {
+            color: #ffd700;
+        }
+
+        body.light-mode .game-output {
+            color: #333;
+            text-shadow: none;
+        }
+
+        body.light-mode .info-bar {
+            color: #ffd700;
+        }
+
+        body.light-mode .health-bar span {
+            color: #ffd700;
+        }
+
+        body.light-mode .health-fill {
+            background: linear-gradient(90deg, #4ecdc4, #ffd700, #ff6b6b);
+        }
+
+        body.light-mode .score {
+            color: #ff6b6b;
+            text-shadow: 0 0 10px rgba(255, 107, 107, 0.5);
+        }
+
+        body.light-mode .version {
+            color: #ffd700;
         }
 
         /* Animated Background */
@@ -31,12 +202,10 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: 
-                linear-gradient(rgba(0, 255, 255, 0.05) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(0, 255, 255, 0.05) 1px, transparent 1px);
             background-size: 50px 50px;
             animation: gridMove 20s linear infinite;
             pointer-events: none;
+            transition: background-image 0.5s ease;
         }
 
         @keyframes gridMove {
@@ -48,40 +217,31 @@
             position: fixed;
             width: 300px;
             height: 300px;
-            background: radial-gradient(circle, rgba(0, 255, 255, 0.15) 0%, transparent 70%);
             border-radius: 50%;
             filter: blur(60px);
             animation: orbFloat 15s ease-in-out infinite;
             pointer-events: none;
+            transition: background 0.5s ease;
         }
 
         .orb1 { top: 10%; left: 10%; }
-        .orb2 { bottom: 10%; right: 10%; background: radial-gradient(circle, rgba(255, 0, 255, 0.15) 0%, transparent 70%); animation-delay: -5s; }
+        .orb2 { bottom: 10%; right: 10%; animation-delay: -5s; }
 
         @keyframes orbFloat {
             0%, 100% { transform: translate(0, 0) scale(1); }
             50% { transform: translate(50px, 50px) scale(1.2); }
         }
 
-        /* Main Container */
+        /* Main Container - ไม่มีการขยับ */
         .calculator-container {
             width: 900px;
-            background: rgba(10, 5, 25, 0.85);
             backdrop-filter: blur(10px);
-            border: 3px solid #00ffff;
             border-radius: 30px;
             padding: 30px;
-            box-shadow: 
-                0 0 30px rgba(0, 255, 255, 0.5),
-                inset 0 0 30px rgba(0, 255, 255, 0.3);
             position: relative;
             z-index: 10;
-            animation: containerPulse 3s ease-in-out infinite;
-        }
-
-        @keyframes containerPulse {
-            0%, 100% { box-shadow: 0 0 30px rgba(0, 255, 255, 0.5), inset 0 0 30px rgba(0, 255, 255, 0.3); }
-            50% { box-shadow: 0 0 50px rgba(255, 0, 255, 0.5), inset 0 0 50px rgba(255, 0, 255, 0.3); }
+            transition: all 0.5s ease;
+            margin: 20px auto;
         }
 
         /* Header */
@@ -94,18 +254,15 @@
         .game-title {
             font-family: 'Press Start 2P', cursive;
             font-size: 28px;
-            background: linear-gradient(45deg, #00ffff, #ff00ff, #00ffff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 20px rgba(0, 255, 255, 0.7);
             margin-bottom: 10px;
             animation: titleGlitch 5s infinite;
+            transition: all 0.5s ease;
         }
 
         @keyframes titleGlitch {
             0%, 100% { transform: skew(0deg); }
             95% { transform: skew(0deg); }
-            96% { transform: skew(10deg); text-shadow: 5px 0 0 #ff00ff, -5px 0 0 #00ffff; }
+            96% { transform: skew(10deg); }
             97% { transform: skew(-10deg); }
             98% { transform: skew(0deg); }
         }
@@ -120,46 +277,187 @@
         .level-dot {
             width: 15px;
             height: 15px;
-            background: #00ffff;
             border-radius: 50%;
-            box-shadow: 0 0 20px #00ffff;
             animation: dotPulse 1.5s ease-in-out infinite;
         }
 
-        .level-dot:nth-child(2) { animation-delay: 0.3s; background: #ff00ff; box-shadow: 0 0 20px #ff00ff; }
-        .level-dot:nth-child(3) { animation-delay: 0.6s; background: #ffff00; box-shadow: 0 0 20px #ffff00; }
+        body.dark-mode .level-dot {
+            background: #00ffff;
+            box-shadow: 0 0 20px #00ffff;
+        }
+
+        body.dark-mode .level-dot:nth-child(2) { 
+            background: #ff00ff; 
+            box-shadow: 0 0 20px #ff00ff; 
+        }
+
+        body.dark-mode .level-dot:nth-child(3) { 
+            background: #ffff00; 
+            box-shadow: 0 0 20px #ffff00; 
+        }
+
+        body.light-mode .level-dot {
+            background: #ffd700;
+            box-shadow: 0 0 20px #ffd700;
+        }
+
+        body.light-mode .level-dot:nth-child(2) { 
+            background: #ff6b6b; 
+            box-shadow: 0 0 20px #ff6b6b; 
+        }
+
+        body.light-mode .level-dot:nth-child(3) { 
+            background: #4ecdc4; 
+            box-shadow: 0 0 20px #4ecdc4; 
+        }
 
         @keyframes dotPulse {
             0%, 100% { opacity: 1; transform: scale(1); }
             50% { opacity: 0.5; transform: scale(0.8); }
         }
 
-        /* Selector */
+        /* Control Panel - Top Right */
+        .control-panel {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 10px;
+            z-index: 1000;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 10px 15px;
+            border-radius: 50px;
+            backdrop-filter: blur(5px);
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        body.dark-mode .control-panel {
+            border: 2px solid #00ffff;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+        }
+
+        body.light-mode .control-panel {
+            border: 2px solid #ffd700;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+            background: rgba(255, 255, 255, 0.8);
+        }
+
+        .control-btn {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background: rgba(0, 0, 0, 0.8);
+            font-size: 18px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+
+        body.dark-mode .control-btn {
+            border: 2px solid #00ffff;
+            color: #00ffff;
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
+        }
+
+        body.light-mode .control-btn {
+            border: 2px solid #ffd700;
+            color: #ffd700;
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        .control-btn:hover {
+            transform: scale(1.1);
+        }
+
+        body.dark-mode .control-btn:hover {
+            border-color: #ff00ff;
+            box-shadow: 0 0 25px rgba(255, 0, 255, 0.7);
+        }
+
+        body.light-mode .control-btn:hover {
+            border-color: #ff6b6b;
+            box-shadow: 0 0 25px rgba(255, 107, 107, 0.7);
+        }
+
+        .control-btn.muted {
+            opacity: 0.5;
+        }
+
+        body.dark-mode .control-btn.muted { border-color: #ff0000; color: #ff0000; }
+        body.light-mode .control-btn.muted { border-color: #ff0000; color: #ff0000; }
+
+        .volume-slider {
+            width: 80px;
+            height: 5px;
+            border-radius: 5px;
+            appearance: none;
+            outline: none;
+        }
+
+        body.dark-mode .volume-slider {
+            background: rgba(0, 255, 255, 0.3);
+        }
+
+        body.light-mode .volume-slider {
+            background: rgba(255, 215, 0, 0.3);
+        }
+
+        .volume-slider::-webkit-slider-thumb {
+            appearance: none;
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        body.dark-mode .volume-slider::-webkit-slider-thumb {
+            background: #00ffff;
+            box-shadow: 0 0 10px #00ffff;
+        }
+
+        body.light-mode .volume-slider::-webkit-slider-thumb {
+            background: #ffd700;
+            box-shadow: 0 0 10px #ffd700;
+        }
+
+        .volume-value {
+            font-size: 12px;
+            min-width: 35px;
+            text-align: center;
+        }
+
+        body.dark-mode .volume-value { color: #00ffff; }
+        body.light-mode .volume-value { color: #ffd700; }
+
+        /* Mode Selector */
         .mode-selector {
             width: 100%;
             padding: 15px;
-            background: rgba(0, 0, 0, 0.7);
-            border: 2px solid #00ffff;
             border-radius: 15px;
-            color: #00ffff;
             font-family: 'Orbitron', sans-serif;
             font-size: 18px;
             font-weight: bold;
             cursor: pointer;
             margin-bottom: 20px;
             transition: all 0.3s;
-            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
         }
 
         .mode-selector:hover {
-            border-color: #ff00ff;
-            box-shadow: 0 0 30px rgba(255, 0, 255, 0.5);
             transform: scale(1.02);
         }
 
-        .mode-selector option {
-            background: #0a0515;
-            color: #00ffff;
+        body.dark-mode .mode-selector:hover {
+            border-color: #ff00ff;
+            box-shadow: 0 0 30px rgba(255, 0, 255, 0.5);
+        }
+
+        body.light-mode .mode-selector:hover {
+            border-color: #ff6b6b;
+            box-shadow: 0 0 30px rgba(255, 107, 107, 0.5);
         }
 
         /* Input Field */
@@ -169,32 +467,37 @@
         }
 
         .input-label {
-            color: #00ffff;
             font-size: 14px;
             margin-bottom: 5px;
             display: block;
             text-transform: uppercase;
             letter-spacing: 2px;
+            transition: color 0.5s ease;
+            color: #00ffff;
         }
 
         .game-input {
             width: 100%;
             padding: 20px;
-            background: rgba(0, 0, 0, 0.8);
-            border: 2px solid #00ffff;
             border-radius: 15px;
-            color: #00ffff;
             font-family: 'Orbitron', sans-serif;
             font-size: 20px;
             transition: all 0.3s;
-            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
         }
 
         .game-input:focus {
             outline: none;
+            transform: scale(1.02);
+        }
+
+        body.dark-mode .game-input:focus {
             border-color: #ff00ff;
             box-shadow: 0 0 30px rgba(255, 0, 255, 0.5);
-            transform: scale(1.02);
+        }
+
+        body.light-mode .game-input:focus {
+            border-color: #ff6b6b;
+            box-shadow: 0 0 30px rgba(255, 107, 107, 0.5);
         }
 
         .input-glow {
@@ -203,23 +506,29 @@
             left: 0;
             width: 100%;
             height: 2px;
-            background: linear-gradient(90deg, transparent, #00ffff, #ff00ff, #00ffff, transparent);
+            background-size: 200% 100%;
             animation: inputGlow 3s linear infinite;
         }
 
+        body.dark-mode .input-glow {
+            background: linear-gradient(90deg, transparent, #00ffff, #ff00ff, #00ffff, transparent);
+        }
+
+        body.light-mode .input-glow {
+            background: linear-gradient(90deg, transparent, #ffd700, #ff6b6b, #4ecdc4, transparent);
+        }
+
         @keyframes inputGlow {
-            0% { background-position: -200% 0; }
-            100% { background-position: 200% 0; }
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
         }
 
         /* Execute Button */
         .execute-btn {
             width: 100%;
             padding: 20px;
-            background: linear-gradient(45deg, #00ffff, #ff00ff);
             border: none;
             border-radius: 15px;
-            color: #0a0515;
             font-family: 'Press Start 2P', cursive;
             font-size: 24px;
             font-weight: bold;
@@ -230,12 +539,30 @@
             transition: all 0.3s;
             text-transform: uppercase;
             letter-spacing: 3px;
+        }
+
+        body.dark-mode .execute-btn {
+            background: linear-gradient(45deg, #00ffff, #ff00ff);
+            color: #0a0515;
             box-shadow: 0 0 30px rgba(0, 255, 255, 0.7);
+        }
+
+        body.light-mode .execute-btn {
+            background: linear-gradient(45deg, #ffd700, #ff6b6b, #4ecdc4);
+            color: #333;
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.7);
         }
 
         .execute-btn:hover {
             transform: scale(1.05);
+        }
+
+        body.dark-mode .execute-btn:hover {
             box-shadow: 0 0 50px rgba(255, 0, 255, 0.9);
+        }
+
+        body.light-mode .execute-btn:hover {
+            box-shadow: 0 0 50px rgba(255, 107, 107, 0.9);
         }
 
         .execute-btn:active {
@@ -259,31 +586,32 @@
 
         /* Output Area */
         .output-container {
-            background: rgba(0, 0, 0, 0.9);
-            border: 3px solid #00ffff;
             border-radius: 20px;
             padding: 5px;
-            box-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
+            transition: all 0.5s ease;
         }
 
         .output-header {
             display: flex;
             justify-content: space-between;
             padding: 10px 20px;
-            background: rgba(0, 255, 255, 0.1);
-            border-bottom: 1px solid #00ffff;
+            border-bottom: 1px solid;
+            transition: all 0.5s ease;
         }
 
         .output-title {
-            color: #00ffff;
             font-weight: bold;
             letter-spacing: 2px;
+            transition: color 0.5s ease;
+            color: #00ffff;
         }
 
         .output-status {
-            color: #00ff00;
             animation: blink 1s infinite;
         }
+
+        body.dark-mode .output-status { color: #00ff00; }
+        body.light-mode .output-status { color: #4ecdc4; }
 
         @keyframes blink {
             0%, 100% { opacity: 1; }
@@ -296,12 +624,11 @@
             padding: 20px;
             background: transparent;
             border: none;
-            color: #00ff00;
             font-family: 'Orbitron', monospace;
             font-size: 20px;
             font-weight: bold;
             resize: none;
-            text-shadow: 0 0 10px #00ff00;
+            transition: all 0.5s ease;
         }
 
         .game-output:focus {
@@ -313,10 +640,10 @@
             display: flex;
             justify-content: space-between;
             margin-top: 20px;
-            color: #00ffff;
             font-size: 12px;
             text-transform: uppercase;
             letter-spacing: 1px;
+            transition: color 0.5s ease;
         }
 
         .health-bar {
@@ -325,12 +652,20 @@
             gap: 5px;
         }
 
+        .health-bar span {
+            transition: color 0.5s ease;
+        }
+
         .health-fill {
             width: 100px;
             height: 10px;
-            background: linear-gradient(90deg, #00ff00, #ffff00, #ff0000);
             border-radius: 5px;
             animation: healthPulse 2s infinite;
+            transition: background 0.5s ease;
+        }
+
+        body.dark-mode .health-fill {
+            background: linear-gradient(90deg, #00ffff, #ff00ff, #ffff00);
         }
 
         @keyframes healthPulse {
@@ -339,9 +674,11 @@
         }
 
         .score {
-            color: #ff00ff;
-            font-weight: bold;
-            text-shadow: 0 0 10px #ff00ff;
+            transition: color 0.5s ease, text-shadow 0.5s ease;
+        }
+
+        .version {
+            transition: color 0.5s ease;
         }
 
         /* Responsive */
@@ -354,17 +691,31 @@
             .game-title {
                 font-size: 20px;
             }
+            
+            .control-panel {
+                top: 10px;
+                right: 10px;
+                padding: 5px 10px;
+            }
         }
     </style>
 </head>
-<body>
+<body class="dark-mode">
     <div class="cyber-grid"></div>
     <div class="glow-orb orb1"></div>
     <div class="glow-orb orb2"></div>
     
+    <!-- Control Panel - Top Right -->
+    <div class="control-panel">
+        <button id="themeToggle" class="control-btn" title="Switch Theme">🌓</button>
+        <button id="soundToggle" class="control-btn">🔊</button>
+        <input type="range" id="volumeSlider" class="volume-slider" min="0" max="1" step="0.1" value="0.7">
+        <span id="volumePercent" class="volume-value">70%</span>
+    </div>
+
     <div class="calculator-container">
         <div class="game-header">
-            <h1 class="game-title">⚡Convertor and Calculator⚡</h1>
+            <h1 class="game-title">⚡ Convertor & Calculator ⚡</h1>
             <div class="level-indicator">
                 <div class="level-dot"></div>
                 <div class="level-dot"></div>
@@ -381,12 +732,12 @@
 
         <div class="input-container">
             <label class="input-label">📝 ENTER EXPRESSION (use spaces for numbers)</label>
-            <input type="text" id="inputField" class="game-input" placeholder="ex., 3 + 5 * 2">
+            <input type="text" id="inputField" class="game-input" placeholder="ex. 3 + 5 * 2 3 5 +">
             <div class="input-glow"></div>
         </div>
 
         <button id="executeBtn" class="execute-btn">
-            <span>⚡ EXECUTE ⚡</span>
+            <span> EXECUTE </span>
             <div class="btn-glitch"></div>
         </button>
 
@@ -404,14 +755,70 @@
                 <div class="health-fill"></div>
             </div>
             <div class="score">🏆 SCORE: 999999</div>
-            <div class="version">💿 v2.0 GAMING</div>
+            <div class="version">💿 v4.3 Calculator</div>
         </div>
     </div>
 
     <script>
-        // ฟังก์ชันหลักทั้งหมด (แปลงจาก Java เป็น JavaScript)
-        
-        // ค่าความสำคัญของ operator
+        // สร้าง Audio Context
+        let audioCtx = null;
+        let isMuted = false;
+        let volume = 0.7;
+
+        // ฟังก์ชันสร้างเสียง
+        function playSound(type) {
+            if (isMuted) return;
+            
+            try {
+                if (!audioCtx) {
+                    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                }
+                
+                if (audioCtx.state === 'suspended') {
+                    audioCtx.resume();
+                }
+
+                const oscillator = audioCtx.createOscillator();
+                const gainNode = audioCtx.createGain();
+                
+                oscillator.connect(gainNode);
+                gainNode.connect(audioCtx.destination);
+                
+                gainNode.gain.value = volume * 0.2;
+                
+                switch(type) {
+                    case 'execute':
+                        oscillator.type = 'sawtooth';
+                        oscillator.frequency.setValueAtTime(200, audioCtx.currentTime);
+                        oscillator.frequency.exponentialRampToValueAtTime(400, audioCtx.currentTime + 0.1);
+                        oscillator.frequency.exponentialRampToValueAtTime(600, audioCtx.currentTime + 0.2);
+                        break;
+                    case 'success':
+                        oscillator.type = 'square';
+                        oscillator.frequency.setValueAtTime(400, audioCtx.currentTime);
+                        oscillator.frequency.exponentialRampToValueAtTime(800, audioCtx.currentTime + 0.1);
+                        break;
+                    case 'error':
+                        oscillator.type = 'triangle';
+                        oscillator.frequency.setValueAtTime(300, audioCtx.currentTime);
+                        oscillator.frequency.exponentialRampToValueAtTime(150, audioCtx.currentTime + 0.2);
+                        break;
+                    case 'click':
+                        oscillator.type = 'sine';
+                        oscillator.frequency.setValueAtTime(600, audioCtx.currentTime);
+                        oscillator.frequency.exponentialRampToValueAtTime(400, audioCtx.currentTime + 0.05);
+                        break;
+                }
+                
+                oscillator.start();
+                oscillator.stop(audioCtx.currentTime + 0.15);
+                
+            } catch(e) {
+                console.log('Audio error:', e);
+            }
+        }
+
+        // ฟังก์ชันหลัก
         function precedence(c) {
             if (c === '+' || c === '-') return 1;
             if (c === '*' || c === '/') return 2;
@@ -419,7 +826,6 @@
             return -1;
         }
 
-        // 1. Infix to Postfix
         function infixToPostfix(infix) {
             let result = [];
             let stack = [];
@@ -428,9 +834,9 @@
                 let c = infix[i];
                 if (c === ' ') continue;
                 
-                if (/[a-zA-Z0-9]/.test(c)) {
+                if (/[a-zA-Z0-9.]/.test(c)) {
                     let num = '';
-                    while (i < infix.length && /[a-zA-Z0-9]/.test(infix[i])) {
+                    while (i < infix.length && /[a-zA-Z0-9.]/.test(infix[i])) {
                         num += infix[i++];
                     }
                     result.push(num);
@@ -457,7 +863,6 @@
             return result.join(' ');
         }
 
-        // 2. Infix to Prefix
         function infixToPrefix(s) {
             let stack = [];
             let result = [];
@@ -466,9 +871,9 @@
                 let c = s[i];
                 if (c === ' ') continue;
                 
-                if (/[a-zA-Z0-9]/.test(c)) {
+                if (/[a-zA-Z0-9.]/.test(c)) {
                     let num = '';
-                    while (i >= 0 && /[a-zA-Z0-9]/.test(s[i])) {
+                    while (i >= 0 && /[a-zA-Z0-9.]/.test(s[i])) {
                         num = s[i--] + num;
                     }
                     result.push(num);
@@ -495,13 +900,12 @@
             return result.reverse().join(' ');
         }
 
-        // 3. Postfix Calculator
         function evalPostfix(exp) {
             let stack = [];
             let tokens = exp.trim().split(/\s+/);
             
             for (let token of tokens) {
-                if (!isNaN(token)) {
+                if (!isNaN(token) && token !== '') {
                     stack.push(parseFloat(token));
                 } else {
                     let b = stack.pop();
@@ -511,20 +915,20 @@
                         case '-': stack.push(a - b); break;
                         case '*': stack.push(a * b); break;
                         case '/': stack.push(a / b); break;
+                        default: throw new Error('Invalid operator');
                     }
                 }
             }
             return stack.pop();
         }
 
-        // 4. Prefix Calculator
         function evalPrefix(exp) {
             let stack = [];
             let tokens = exp.trim().split(/\s+/);
             
             for (let i = tokens.length - 1; i >= 0; i--) {
                 let token = tokens[i];
-                if (!isNaN(token)) {
+                if (!isNaN(token) && token !== '') {
                     stack.push(parseFloat(token));
                 } else {
                     let a = stack.pop();
@@ -534,14 +938,15 @@
                         case '-': stack.push(a - b); break;
                         case '*': stack.push(a * b); break;
                         case '/': stack.push(a / b); break;
+                        default: throw new Error('Invalid operator');
                     }
                 }
             }
             return stack.pop();
         }
 
-        // Animation Effects
-        function typeWriter(text, element, speed = 50) {
+        // Typewriter Effect
+        function typeWriter(text, element, speed = 30) {
             let i = 0;
             element.value = '';
             function type() {
@@ -554,18 +959,47 @@
             type();
         }
 
+        // Theme Toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const body = document.body;
+
+        themeToggle.addEventListener('click', function() {
+            playSound('click');
+            
+            if (body.classList.contains('dark-mode')) {
+                body.classList.remove('dark-mode');
+                body.classList.add('light-mode');
+                themeToggle.textContent = '🌞';
+                typeWriter('✨ LIGHT MODE ACTIVATED ✨', outputArea, 30);
+            } else {
+                body.classList.remove('light-mode');
+                body.classList.add('dark-mode');
+                themeToggle.textContent = '🌓';
+                typeWriter('🌙 DARK MODE ACTIVATED 🌙', outputArea, 30);
+            }
+        });
+
         // Handle Execute
-        document.getElementById('executeBtn').addEventListener('click', function() {
-            let input = document.getElementById('inputField').value.trim();
-            let mode = parseInt(document.getElementById('modeSelector').value);
-            let outputArea = document.getElementById('outputArea');
+        const executeBtn = document.getElementById('executeBtn');
+        const inputField = document.getElementById('inputField');
+        const modeSelector = document.getElementById('modeSelector');
+        const outputArea = document.getElementById('outputArea');
+
+        executeBtn.addEventListener('click', function() {
+            playSound('click');
+            
+            let input = inputField.value.trim();
+            let mode = parseInt(modeSelector.value);
             
             if (input === '') {
+                playSound('error');
                 typeWriter('⚠️ PLEASE ENTER AN EXPRESSION! ⚠️', outputArea, 30);
                 return;
             }
 
             try {
+                playSound('execute');
+                
                 let result;
                 switch(mode) {
                     case 1:
@@ -585,33 +1019,77 @@
                         typeWriter(`💰 RESULT: ${result}`, outputArea, 20);
                         break;
                 }
+                
+                setTimeout(() => playSound('success'), 300);
+                
             } catch (error) {
+                playSound('error');
                 typeWriter('💀 ERROR: CHECK SYNTAX OR SPACING! 💀', outputArea, 30);
                 console.error(error);
             }
         });
 
-        // Enter key support
-        document.getElementById('inputField').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                document.getElementById('executeBtn').click();
+        // Sound Controls
+        const soundBtn = document.getElementById('soundToggle');
+        const volumeSlider = document.getElementById('volumeSlider');
+        const volumePercent = document.getElementById('volumePercent');
+        
+        soundBtn.addEventListener('click', function() {
+            isMuted = !isMuted;
+            soundBtn.textContent = isMuted ? '🔇' : '🔊';
+            soundBtn.classList.toggle('muted');
+            
+            if (!isMuted) {
+                playSound('click');
             }
+        });
+
+        volumeSlider.addEventListener('input', function(e) {
+            volume = parseFloat(e.target.value);
+            volumePercent.textContent = Math.round(volume * 100) + '%';
+            
+            if (!isMuted) {
+                playSound('click');
+            }
+        });
+
+        // Enter key support
+        inputField.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                executeBtn.click();
+            }
+        });
+
+        // Mode change sound
+        modeSelector.addEventListener('change', function() {
+            playSound('click');
+            let output = outputArea;
+            output.style.color = '#ff00ff';
+            setTimeout(() => {
+                if (body.classList.contains('dark-mode')) {
+                    output.style.color = '#00ff00';
+                } else {
+                    output.style.color = '#333';
+                }
+            }, 200);
         });
 
         // Initial animation
         window.addEventListener('load', function() {
             setTimeout(() => {
-                typeWriter('⚡ SYSTEM ONLINE | ENTER EXPRESSION TO BEGIN ⚡', 
-                          document.getElementById('outputArea'), 30);
+                typeWriter('⚡ SYSTEM ONLINE | PRESS 🌓 TO SWITCH THEME ⚡', outputArea, 30);
             }, 500);
         });
 
-        // Glitch effect on mode change
-        document.getElementById('modeSelector').addEventListener('change', function() {
-            let output = document.getElementById('outputArea');
-            output.style.color = '#ff00ff';
-            setTimeout(() => output.style.color = '#00ff00', 200);
-        });
+        // Initialize audio on first click
+        document.body.addEventListener('click', function initAudio() {
+            if (!audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            }
+            if (audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+        }, { once: true });
     </script>
 </body>
 </html>
