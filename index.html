@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>⚡ EXPRESSION MASTER ⚡ | GAMING EDITION</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Orbitron:wght@400;700;900&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            background: radial-gradient(circle at 20% 20%, #1a0b2e, #0a0515);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Orbitron', sans-serif;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Animated Background */
+        .cyber-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(0, 255, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 255, 255, 0.05) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: gridMove 20s linear infinite;
+            pointer-events: none;
+        }
+
+        @keyframes gridMove {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+
+        .glow-orb {
+            position: fixed;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(0, 255, 255, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+            filter: blur(60px);
+            animation: orbFloat 15s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        .orb1 { top: 10%; left: 10%; }
+        .orb2 { bottom: 10%; right: 10%; background: radial-gradient(circle, rgba(255, 0, 255, 0.15) 0%, transparent 70%); animation-delay: -5s; }
+
+        @keyframes orbFloat {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(50px, 50px) scale(1.2); }
+        }
+
+        /* Main Container */
+        .calculator-container {
+            width: 900px;
+            background: rgba(10, 5, 25, 0.85);
+            backdrop-filter: blur(10px);
+            border: 3px solid #00ffff;
+            border-radius: 30px;
+            padding: 30px;
+            box-shadow: 
+                0 0 30px rgba(0, 255, 255, 0.5),
+                inset 0 0 30px rgba(0, 255, 255, 0.3);
+            position: relative;
+            z-index: 10;
+            animation: containerPulse 3s ease-in-out infinite;
+        }
+
+        @keyframes containerPulse {
+            0%, 100% { box-shadow: 0 0 30px rgba(0, 255, 255, 0.5), inset 0 0 30px rgba(0, 255, 255, 0.3); }
+            50% { box-shadow: 0 0 50px rgba(255, 0, 255, 0.5), inset 0 0 50px rgba(255, 0, 255, 0.3); }
+        }
+
+        /* Header */
+        .game-header {
+            text-align: center;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .game-title {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 28px;
+            background: linear-gradient(45deg, #00ffff, #ff00ff, #00ffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 20px rgba(0, 255, 255, 0.7);
+            margin-bottom: 10px;
+            animation: titleGlitch 5s infinite;
+        }
+
+        @keyframes titleGlitch {
+            0%, 100% { transform: skew(0deg); }
+            95% { transform: skew(0deg); }
+            96% { transform: skew(10deg); text-shadow: 5px 0 0 #ff00ff, -5px 0 0 #00ffff; }
+            97% { transform: skew(-10deg); }
+            98% { transform: skew(0deg); }
+        }
+
+        .level-indicator {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .level-dot {
+            width: 15px;
+            height: 15px;
+            background: #00ffff;
+            border-radius: 50%;
+            box-shadow: 0 0 20px #00ffff;
+            animation: dotPulse 1.5s ease-in-out infinite;
+        }
+
+        .level-dot:nth-child(2) { animation-delay: 0.3s; background: #ff00ff; box-shadow: 0 0 20px #ff00ff; }
+        .level-dot:nth-child(3) { animation-delay: 0.6s; background: #ffff00; box-shadow: 0 0 20px #ffff00; }
+
+        @keyframes dotPulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(0.8); }
+        }
+
+        /* Selector */
+        .mode-selector {
+            width: 100%;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.7);
+            border: 2px solid #00ffff;
+            border-radius: 15px;
+            color: #00ffff;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-bottom: 20px;
+            transition: all 0.3s;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+        }
+
+        .mode-selector:hover {
+            border-color: #ff00ff;
+            box-shadow: 0 0 30px rgba(255, 0, 255, 0.5);
+            transform: scale(1.02);
+        }
+
+        .mode-selector option {
+            background: #0a0515;
+            color: #00ffff;
+        }
+
+        /* Input Field */
+        .input-container {
+            position: relative;
+            margin-bottom: 25px;
+        }
+
+        .input-label {
+            color: #00ffff;
+            font-size: 14px;
+            margin-bottom: 5px;
+            display: block;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .game-input {
+            width: 100%;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.8);
+            border: 2px solid #00ffff;
+            border-radius: 15px;
+            color: #00ffff;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 20px;
+            transition: all 0.3s;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+        }
+
+        .game-input:focus {
+            outline: none;
+            border-color: #ff00ff;
+            box-shadow: 0 0 30px rgba(255, 0, 255, 0.5);
+            transform: scale(1.02);
+        }
+
+        .input-glow {
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #00ffff, #ff00ff, #00ffff, transparent);
+            animation: inputGlow 3s linear infinite;
+        }
+
+        @keyframes inputGlow {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+
+        /* Execute Button */
+        .execute-btn {
+            width: 100%;
+            padding: 20px;
+            background: linear-gradient(45deg, #00ffff, #ff00ff);
+            border: none;
+            border-radius: 15px;
+            color: #0a0515;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 24px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-bottom: 25px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.7);
+        }
+
+        .execute-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 50px rgba(255, 0, 255, 0.9);
+        }
+
+        .execute-btn:active {
+            transform: scale(0.95);
+        }
+
+        .btn-glitch {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.5), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.5s;
+        }
+
+        .execute-btn:hover .btn-glitch {
+            transform: translateX(100%);
+        }
+
+        /* Output Area */
+        .output-container {
+            background: rgba(0, 0, 0, 0.9);
+            border: 3px solid #00ffff;
+            border-radius: 20px;
+            padding: 5px;
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
+        }
+
+        .output-header {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 20px;
+            background: rgba(0, 255, 255, 0.1);
+            border-bottom: 1px solid #00ffff;
+        }
+
+        .output-title {
+            color: #00ffff;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+
+        .output-status {
+            color: #00ff00;
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .game-output {
+            width: 100%;
+            min-height: 150px;
+            padding: 20px;
+            background: transparent;
+            border: none;
+            color: #00ff00;
+            font-family: 'Orbitron', monospace;
+            font-size: 20px;
+            font-weight: bold;
+            resize: none;
+            text-shadow: 0 0 10px #00ff00;
+        }
+
+        .game-output:focus {
+            outline: none;
+        }
+
+        /* Info Bar */
+        .info-bar {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+            color: #00ffff;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .health-bar {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .health-fill {
+            width: 100px;
+            height: 10px;
+            background: linear-gradient(90deg, #00ff00, #ffff00, #ff0000);
+            border-radius: 5px;
+            animation: healthPulse 2s infinite;
+        }
+
+        @keyframes healthPulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        .score {
+            color: #ff00ff;
+            font-weight: bold;
+            text-shadow: 0 0 10px #ff00ff;
+        }
+
+        /* Responsive */
+        @media (max-width: 950px) {
+            .calculator-container {
+                width: 95%;
+                padding: 20px;
+            }
+            
+            .game-title {
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="cyber-grid"></div>
+    <div class="glow-orb orb1"></div>
+    <div class="glow-orb orb2"></div>
+    
+    <div class="calculator-container">
+        <div class="game-header">
+            <h1 class="game-title">⚡Convertor and Calculator⚡</h1>
+            <div class="level-indicator">
+                <div class="level-dot"></div>
+                <div class="level-dot"></div>
+                <div class="level-dot"></div>
+            </div>
+        </div>
+
+        <select id="modeSelector" class="mode-selector">
+            <option value="1">🎮 LEVEL 1: INFIX → POSTFIX</option>
+            <option value="2">🎮 LEVEL 2: INFIX → PREFIX</option>
+            <option value="3">🎮 LEVEL 3: POSTFIX CALCULATOR</option>
+            <option value="4">🎮 LEVEL 4: PREFIX CALCULATOR</option>
+        </select>
+
+        <div class="input-container">
+            <label class="input-label">📝 ENTER EXPRESSION (use spaces for numbers)</label>
+            <input type="text" id="inputField" class="game-input" placeholder="ex., 3 + 5 * 2">
+            <div class="input-glow"></div>
+        </div>
+
+        <button id="executeBtn" class="execute-btn">
+            <span>⚡ EXECUTE ⚡</span>
+            <div class="btn-glitch"></div>
+        </button>
+
+        <div class="output-container">
+            <div class="output-header">
+                <span class="output-title">📟 OUTPUT CONSOLE</span>
+                <span class="output-status">● SYSTEM READY</span>
+            </div>
+            <textarea id="outputArea" class="game-output" readonly rows="6">⚡ Ready for action... ⚡</textarea>
+        </div>
+
+        <div class="info-bar">
+            <div class="health-bar">
+                <span>🛡️ HP:</span>
+                <div class="health-fill"></div>
+            </div>
+            <div class="score">🏆 SCORE: 999999</div>
+            <div class="version">💿 v2.0 GAMING</div>
+        </div>
+    </div>
+
+    <script>
+        // ฟังก์ชันหลักทั้งหมด (แปลงจาก Java เป็น JavaScript)
+        
+        // ค่าความสำคัญของ operator
+        function precedence(c) {
+            if (c === '+' || c === '-') return 1;
+            if (c === '*' || c === '/') return 2;
+            if (c === '^') return 3;
+            return -1;
+        }
+
+        // 1. Infix to Postfix
+        function infixToPostfix(infix) {
+            let result = [];
+            let stack = [];
+            
+            for (let i = 0; i < infix.length; i++) {
+                let c = infix[i];
+                if (c === ' ') continue;
+                
+                if (/[a-zA-Z0-9]/.test(c)) {
+                    let num = '';
+                    while (i < infix.length && /[a-zA-Z0-9]/.test(infix[i])) {
+                        num += infix[i++];
+                    }
+                    result.push(num);
+                    i--;
+                } else if (c === '(') {
+                    stack.push(c);
+                } else if (c === ')') {
+                    while (stack.length > 0 && stack[stack.length - 1] !== '(') {
+                        result.push(stack.pop());
+                    }
+                    stack.pop();
+                } else {
+                    while (stack.length > 0 && precedence(stack[stack.length - 1]) >= precedence(c)) {
+                        result.push(stack.pop());
+                    }
+                    stack.push(c);
+                }
+            }
+            
+            while (stack.length > 0) {
+                result.push(stack.pop());
+            }
+            
+            return result.join(' ');
+        }
+
+        // 2. Infix to Prefix
+        function infixToPrefix(s) {
+            let stack = [];
+            let result = [];
+            
+            for (let i = s.length - 1; i >= 0; i--) {
+                let c = s[i];
+                if (c === ' ') continue;
+                
+                if (/[a-zA-Z0-9]/.test(c)) {
+                    let num = '';
+                    while (i >= 0 && /[a-zA-Z0-9]/.test(s[i])) {
+                        num = s[i--] + num;
+                    }
+                    result.push(num);
+                    i++;
+                } else if (c === ')') {
+                    stack.push(c);
+                } else if (c === '(') {
+                    while (stack.length > 0 && stack[stack.length - 1] !== ')') {
+                        result.push(stack.pop());
+                    }
+                    stack.pop();
+                } else {
+                    while (stack.length > 0 && precedence(stack[stack.length - 1]) > precedence(c)) {
+                        result.push(stack.pop());
+                    }
+                    stack.push(c);
+                }
+            }
+            
+            while (stack.length > 0) {
+                result.push(stack.pop());
+            }
+            
+            return result.reverse().join(' ');
+        }
+
+        // 3. Postfix Calculator
+        function evalPostfix(exp) {
+            let stack = [];
+            let tokens = exp.trim().split(/\s+/);
+            
+            for (let token of tokens) {
+                if (!isNaN(token)) {
+                    stack.push(parseFloat(token));
+                } else {
+                    let b = stack.pop();
+                    let a = stack.pop();
+                    switch(token) {
+                        case '+': stack.push(a + b); break;
+                        case '-': stack.push(a - b); break;
+                        case '*': stack.push(a * b); break;
+                        case '/': stack.push(a / b); break;
+                    }
+                }
+            }
+            return stack.pop();
+        }
+
+        // 4. Prefix Calculator
+        function evalPrefix(exp) {
+            let stack = [];
+            let tokens = exp.trim().split(/\s+/);
+            
+            for (let i = tokens.length - 1; i >= 0; i--) {
+                let token = tokens[i];
+                if (!isNaN(token)) {
+                    stack.push(parseFloat(token));
+                } else {
+                    let a = stack.pop();
+                    let b = stack.pop();
+                    switch(token) {
+                        case '+': stack.push(a + b); break;
+                        case '-': stack.push(a - b); break;
+                        case '*': stack.push(a * b); break;
+                        case '/': stack.push(a / b); break;
+                    }
+                }
+            }
+            return stack.pop();
+        }
+
+        // Animation Effects
+        function typeWriter(text, element, speed = 50) {
+            let i = 0;
+            element.value = '';
+            function type() {
+                if (i < text.length) {
+                    element.value += text.charAt(i);
+                    i++;
+                    setTimeout(type, speed);
+                }
+            }
+            type();
+        }
+
+        // Handle Execute
+        document.getElementById('executeBtn').addEventListener('click', function() {
+            let input = document.getElementById('inputField').value.trim();
+            let mode = parseInt(document.getElementById('modeSelector').value);
+            let outputArea = document.getElementById('outputArea');
+            
+            if (input === '') {
+                typeWriter('⚠️ PLEASE ENTER AN EXPRESSION! ⚠️', outputArea, 30);
+                return;
+            }
+
+            try {
+                let result;
+                switch(mode) {
+                    case 1:
+                        result = infixToPostfix(input);
+                        typeWriter(`🎯 POSTFIX: ${result}`, outputArea, 20);
+                        break;
+                    case 2:
+                        result = infixToPrefix(input);
+                        typeWriter(`🎯 PREFIX: ${result}`, outputArea, 20);
+                        break;
+                    case 3:
+                        result = evalPostfix(input);
+                        typeWriter(`💰 RESULT: ${result}`, outputArea, 20);
+                        break;
+                    case 4:
+                        result = evalPrefix(input);
+                        typeWriter(`💰 RESULT: ${result}`, outputArea, 20);
+                        break;
+                }
+            } catch (error) {
+                typeWriter('💀 ERROR: CHECK SYNTAX OR SPACING! 💀', outputArea, 30);
+                console.error(error);
+            }
+        });
+
+        // Enter key support
+        document.getElementById('inputField').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                document.getElementById('executeBtn').click();
+            }
+        });
+
+        // Initial animation
+        window.addEventListener('load', function() {
+            setTimeout(() => {
+                typeWriter('⚡ SYSTEM ONLINE | ENTER EXPRESSION TO BEGIN ⚡', 
+                          document.getElementById('outputArea'), 30);
+            }, 500);
+        });
+
+        // Glitch effect on mode change
+        document.getElementById('modeSelector').addEventListener('change', function() {
+            let output = document.getElementById('outputArea');
+            output.style.color = '#ff00ff';
+            setTimeout(() => output.style.color = '#00ff00', 200);
+        });
+    </script>
+</body>
+</html>
